@@ -1,0 +1,26 @@
+# H200 SXM5 141GB — Hopper (HBM3e) benchmark config
+device: 0
+benchmarks:
+  - name: matmul
+    sizes: [2048, 4096, 8192, 16384]
+    precisions: [fp16, bf16, fp32, tf32]
+    iterations: 100
+    warmup: 10
+
+  - name: tensorcore
+    ops: [bf16_gemm, fp16_gemm, tf32_gemm]
+    sizes: [[4096, 4096, 4096], [8192, 8192, 8192], [16384, 16384, 16384]]
+    iterations: 100
+
+  - name: bandwidth
+    directions: [h2d, d2h, d2d]
+    sizes: [256mb, 1gb, 4gb, 8gb]
+    note: "HBM3e — test extended range up to 8GB"
+
+  - name: thermal
+    note: "H200 same TDP as H100 but higher memory bandwidth"
+
+output:
+  format: json
+  path: results/h200_sxm/
+  include_raw: true
