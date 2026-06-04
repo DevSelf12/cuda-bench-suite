@@ -1,0 +1,26 @@
+# RTX 5090 — Blackwell consumer GPU benchmark config
+device: 0
+benchmarks:
+  - name: matmul
+    sizes: [1024, 2048, 4096, 8192]
+    precisions: [fp16, bf16, fp32, tf32]
+    iterations: 100
+    warmup: 10
+
+  - name: tensorcore
+    ops: [bf16_gemm, fp16_gemm, tf32_gemm]
+    sizes: [[2048, 2048, 2048], [4096, 4096, 4096], [8192, 8192, 8192]]
+    iterations: 100
+
+  - name: bandwidth
+    directions: [h2d, d2h, d2d]
+    sizes: [256mb, 1gb, 4gb]
+    note: "GDDR7 — expect higher bandwidth than GDDR6X"
+
+  - name: thermal
+    note: "RTX 5090 TDP 575W — monitor closely"
+
+output:
+  format: json
+  path: results/rtx5090/
+  include_raw: true
