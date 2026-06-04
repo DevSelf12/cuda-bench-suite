@@ -1,0 +1,25 @@
+# H100 SXM5 80GB — Hopper benchmark config
+device: 0
+benchmarks:
+  - name: matmul
+    sizes: [2048, 4096, 8192, 16384]
+    precisions: [fp16, bf16, fp32, tf32]
+    iterations: 100
+    warmup: 10
+
+  - name: tensorcore
+    ops: [bf16_gemm, fp16_gemm, tf32_gemm]
+    sizes: [[4096, 4096, 4096], [8192, 8192, 8192], [16384, 16384, 16384]]
+    iterations: 100
+
+  - name: bandwidth
+    directions: [h2d, d2h, d2d]
+    sizes: [256mb, 1gb, 4gb]
+
+  - name: thermal
+    note: "Monitor power/thermal during matmul"
+
+output:
+  format: json
+  path: results/h100_sxm/
+  include_raw: true
