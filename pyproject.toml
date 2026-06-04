@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "cuda-bench-suite"
+version = "0.1.0"
+description = "CUDA Benchmark & Profiling Toolkit for Nvidia GPUs"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "DevSelf12", email = "devself12@users.noreply.github.com"},
+]
+keywords = ["cuda", "benchmark", "nvidia", "gpu", "profiling", "h100", "h200", "rtx5090"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Cuda",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Benchmark",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pyyaml>=6.0",
+    "rich>=13.0",
+    "pynvml>=11.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+cubench = "cubench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
