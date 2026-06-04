@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# CUDA
+*.o
+*.cubin
+*.ptx
+*.fatbin
+
+# Profiling
+*.ncu-rep
+*.nsys-rep
+*.sqlite
+
+# Results
+results/
+*.json
+!configs/*.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.venv/
+venv/
